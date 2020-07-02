@@ -1,3 +1,145 @@
-console.log('hey')
+// froth landing
+
+let started = false
+
+let startEl = document.createElement('div')
+    startEl.classList.add('startEl')
+    startEl.style.cssText = `
+      position: fixed;
+      opacity: 1;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 100px 0 100px 185px;
+      border-color: transparent transparent transparent green;
+      cursor: pointer;
+      transition: 2s;
+    `
+    startEl.onclick = run
+    document.body.appendChild(startEl)
+
+function run() {
+  const TEMPO = 0.4878
+
+  if (started) return
+  started = true
+
+  let domStartEl = document.querySelector('.startEl')
+      domStartEl.style.cssText = `
+        position: fixed;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 100px 0 100px 185px;
+        border-color: transparent transparent transparent green;
+        cursor: pointer;
+        transition: 2s;
+      `
+
+  let styleTag = document.createElement('style')
+  styleTag.textContent = `
+    @keyframes pulse {
+      0%   { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  `
+  document.body.appendChild(styleTag)
+
+  let audioEl = document.createElement('audio')
+      audioEl.style.cssText = `
+        position: fixed;
+        left: 50%;
+        bottom: -60px;
+        transform: translateX(-50%);
+        z-index: 1;
+      `
+      audioEl.autoplay = true
+      audioEl.controls = true
+  let audioSourceEl = document.createElement('source')
+      audioSourceEl.src = 'https://mp3downloadfree.ru/files/m1/Haddaway_What-Is-Love.mp3'
+      audioSourceEl.type = 'audio/mpeg'
+      audioEl.appendChild(audioSourceEl)
+      document.body.appendChild(audioEl)
+
+  setTimeout(() => {
+    let leftLightEl = document.createElement('div')
+        leftLightEl.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 500px;
+          height: 500px;
+          background: radial-gradient(circle at 0% 0%, red 10%, transparent 50%);
+          animation: pulse ${TEMPO}s infinite alternate;
+          z-index: 1;
+        `
+        document.body.appendChild(leftLightEl)
+
+    let leftRightEl = document.createElement('div')
+        leftRightEl.style.cssText = `
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 500px;
+          height: 500px;
+          background: radial-gradient(circle at 100% 0%, green 10%, transparent 50%);
+          animation: pulse ${TEMPO}s infinite alternate;
+          animation-delay: ${TEMPO}s;
+          z-index: 1;
+        `
+        document.body.appendChild(leftRightEl)
+  }, 12800)
+
+  function addImage(src, stylesBefore = '', stylesAfter = '', delay = 0) {
+    let styles = 'position: fixed; transition: 2s;'
+    let imageEl = document.createElement('img')
+        imageEl.src = src
+        imageEl.style.cssText = styles + stylesBefore
+    document.body.appendChild(imageEl)
+
+    setTimeout(() => {
+      imageEl.style.cssText = styles + stylesAfter
+    }, delay)
+  }
+
+  // rick astley
+  addImage('https://media3.giphy.com/media/ZE5DmCqNMr3yDXq1Zu/giphy.gif',
+          'bottom: -480px; left: 50%; transform: translateX(-50%);',
+          'bottom: -25px;  left: 50%; transform: translateX(-50%);',
+          4000
+  )
+
+  // sax
+  addImage('https://i.imgur.com/qKDRQa1.gif',
+          'bottom: 0; right: -392px; height: 300px;',
+          'bottom: 0; right: 0;      height: 300px;',
+          12000
+  )
+
+  // disco ball
+  addImage('https://img1.picmix.com/output/stamp/normal/3/5/1/1/1321153_5c59f.gif',
+          'top: -400px; left: 50%; transform: translateX(-50%)',
+          'top: 0;      left: 50%; transform: translateX(-50%)',
+          20000
+  )
+
+  // dog
+  addImage('https://i.ya-webdesign.com/images/dancing-gifs-png-7.gif',
+          'bottom: 10%; left: -300px; transform: rotate(90deg); height: 300px;',
+          'bottom: 10%; left: 0;      transform: rotate(90deg); height: 300px;',
+          20000
+  )
+}
+
+console.log('What is love?')
+
 -//-
+
 console.log('hey2')
